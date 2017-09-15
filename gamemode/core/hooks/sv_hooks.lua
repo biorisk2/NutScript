@@ -591,11 +591,16 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 		local listener_pos = listener:GetPos()
 		local speaker_pos = speaker:GetPos()
 		local voice_dis = math.Distance(speaker_pos.x, speaker_pos.y, listener_pos.x, listener_pos.y)
-		if voice_dis > nut.config.get("voiceDistance") then
-			allowVoice = false
+		canSpeak = false // localising this seemed to cause funky issues.
+		if voice_dis < nut.config.get("voiceDistance") then
+			if math.abs((listener_pos.z - speaker_pos.z)) < 250 then // make a ns config variable for the 250 value, i still need to learn how to make those..
+				canSpeak = true
+			else
+				canSpeak = false
+			end
 		end
 	end
-	return allowVoice
+	return canSpeak
 end
 
 function GM:OnPhysgunFreeze(weapon, physObj, entity, client)
