@@ -13,7 +13,7 @@ function ENT:Initialize()
 		self:DrawShadow(true)
 		self:SetSolid(SOLID_BBOX)
 		self:PhysicsInit(SOLID_BBOX)
-
+		self:SetCollisionBounds(Vector(8,8,0), Vector(-8,-8,74)) -- with <3 from tyler.
 		self.items = {}
 		self.messages = {}
 		self.factions = {}
